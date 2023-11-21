@@ -1,0 +1,6 @@
+.box {
+    background-color: whitesmoke;
+    border: 2px solid black;
+    min-height: 50px;
+    font-size: 1rem;
+}
