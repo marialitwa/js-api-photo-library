@@ -68,4 +68,4 @@ function generateCards(images) {
     });
 }
 
-fetchData();
+fetchData(); 
