@@ -3,6 +3,14 @@
 const apiKey = "40712154-08ce4dcac58c3112602f88d10";
 const apiUrl = "https://pixabay.com/api/";
 
+const container = document.querySelector('[data-js="api-data"]');
+
+const form = document.querySelector('[data-js="form-search-bar"]');
+const input = document.querySelector('[data-js="input-search-bar"]');
+const clearInputBtn = document.querySelector('[data-js="clear-input-btn"]');
+
+
+
 
 async function fetchData(query) {
 
@@ -17,7 +25,6 @@ async function fetchData(query) {
             // Success (Good Response)
             return generateCards(data.hits);
             
-
         } else {
             // Failure (Bad Response)
             console.error("Bad Response");
@@ -30,7 +37,7 @@ async function fetchData(query) {
 
 
 function generateCards(images) {
-    const container = document.querySelector('[data-js="api-data"]');
+
     container.innerHTML = ""; // Clear previous content
 
     images.forEach(function(image) {
@@ -66,6 +73,7 @@ function generateCards(images) {
         tags.style.textTransform = "capitalize";
         tags.textContent = `Tags: ${image.tags}`;
         cardBody.append(tags)
+
         
     });
 }
@@ -74,18 +82,22 @@ fetchData();
 
 
 
-
-
 function filterByQuery() {
-
-const form = document.querySelector('[data-js="form-search-bar"]');
-const input = document.querySelector('[data-js="input-search-bar"]');
 
 form.addEventListener('submit', (event) => {
     event.preventDefault(); 
     fetchData(input.value); 
-
 })
 }
-
 filterByQuery();
+
+
+function clearInputSearchbar() {
+    clearInputBtn.addEventListener('click', () => {
+    input.value = "";
+    fetchData(); 
+    });   
+}
+
+clearInputSearchbar();
+
