@@ -124,6 +124,19 @@
       <!-- FILTER BY ORIENTATION -->
           <fieldset>
             <div class="form-check">
+
+              <!-- NEGATIVE MARGIN NOT APPLYING
+              BOOTSTRAP DOCS: In CSS, margin properties can utilize negative values (padding cannot). 
+              These negative margins are disabled by default, but can be enabled in 
+              Sass by setting $enable-negative-margins: true.
+              The syntax is nearly the same as the default, positive margin utilities, 
+              but with the addition of n before the requested size. 
+              
+              TRIED BUT FAILED:
+              custom class for legend applying negative margin => affects positioning of the first radio checkbox
+              custom class for fieldset and legend applying position relative & absolute => affects positioning of all 3 radio checkbox
+              -->
+        
               <legend class="mt-4">Orientation</legend>
               <input 
                 class="form-check-input" 
