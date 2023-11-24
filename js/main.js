@@ -1,11 +1,13 @@
 // import images from "./data.js"
 
 const apiKey = "40712154-08ce4dcac58c3112602f88d10";
-const apiUrl = "https://pixabay.com/api/"
+const apiUrl = "https://pixabay.com/api/";
 
-async function fetchData() {
 
-    const query = "elephants"; // For example, searching for images of elephants
+async function fetchData(query) {
+
+    // For example, searching for images of elephants. Used only when not filtering by searchbar query
+    // const query = "elephants"; 
 
     try {
         const response = await fetch(`${apiUrl}?key=${apiKey}&q=${query}`);
@@ -69,3 +71,21 @@ function generateCards(images) {
 }
 
 fetchData(); 
+
+
+
+
+
+function filterByQuery() {
+
+const form = document.querySelector('[data-js="form-search-bar"]');
+const input = document.querySelector('[data-js="input-search-bar"]');
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault(); 
+    fetchData(input.value); 
+
+})
+}
+
+filterByQuery();
