@@ -1,7 +1,6 @@
-// import images from "./data.js"
-
 const apiKey = "40712154-08ce4dcac58c3112602f88d10";
 const apiUrl = "https://pixabay.com/api/";
+const itemsPerPage = 50;
 
 const container = document.querySelector('[data-js="api-data"]');
 
@@ -10,7 +9,7 @@ const input = document.querySelector('[data-js="input-search-bar"]');
 const clearInputBtn = document.querySelector('[data-js="clear-input-btn"]');
 
 
-
+        
 
 async function fetchData(query) {
 
@@ -18,8 +17,10 @@ async function fetchData(query) {
     // const query = "elephants"; 
 
     try {
-        const response = await fetch(`${apiUrl}?key=${apiKey}&q=${query}`);
+        const response = await fetch(`${apiUrl}?key=${apiKey}&q=${query}&per_page=${itemsPerPage}`);
         const data = await response.json();
+
+        console.log(data)
 
         if (response.ok) {
             // Success (Good Response)
@@ -78,7 +79,7 @@ function generateCards(images) {
     });
 }
 
-fetchData(); 
+fetchData(""); 
 
 
 
