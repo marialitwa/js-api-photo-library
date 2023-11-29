@@ -14,7 +14,7 @@
     <header>
     <nav class="navbar navbar-expand navbar-dark bg-dark">
       <div class="container-fluid d-flex justify-content-start ms-5 ps-5">
-        <!-- <a href="#" class="navbar-brand">Brand</a> -->
+        <a href="#" class="navbar-brand">Brand Logo</a>
         <ul class="navbar-nav">
           <li class="nav-item">
             <a href="#" class="nav-link">Home</a>
@@ -56,7 +56,7 @@
         class="form-control form-control-lg" 
         data-js="input-search-bar"
         type="text" 
-        placeholder="Search for images, videos and illustrations ..."
+        placeholder="Search for stunning images and illustrations ..."
         aria-label="Search" 
         >
 
@@ -101,11 +101,15 @@
       <!-- FILTER BY MEDIA TYPE -->
           <fieldset>
             <legend class="mt-4">Media Type</legend>
-            <select class="form-select" aria-label="Select type of media">
-              <option selected>Select Media Type</option>
-              <option value="photo">Photo</option>
-              <option value="video">Video</option>
-              <option value="illustration">Illustration</option>
+            <select 
+              class="form-select" 
+              aria-label="Select type of media"
+              data-js="select-type">
+                <option>Select Media Type</option>
+                <option selected value="all">All</option>
+                <option value="photo" data-js="select-type-photo">Photo</option>
+                <option value="illustration" data-js="select-type-illustration">Illustration</option>
+                <option value="vector"  data-js="select-type-vector">Vector Graphic</option>
             </select>
           </fieldset>
 
@@ -113,7 +117,8 @@
       <!-- FILTER BY CATEGORY -->
           <fieldset>
             <legend class="mt-4">Category</legend>
-            <select class="form-select" aria-label="Select category">
+            <select class="form-select" aria-label="Select category"
+            data-js="select-category">
               <option selected>Select Category</option>
               <option value="">Animals</option>
               <option value="">Backgrounds</option>
