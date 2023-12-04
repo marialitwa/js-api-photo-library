@@ -72,11 +72,11 @@ function generateCards(images) {
        
         const views = document.createElement("p");
         views.classList.add("card-text");
-        views.textContent = `${image.views} views`;
+        views.textContent = `${image.views} views `;
 
         const likes = document.createElement("p");
         likes.classList.add("card-text");
-        likes.textContent = `${image.likes} likes`;
+        likes.textContent = `❤ ${image.likes} likes`;
         
         const links = document.createElement("a");
         links.classList.add("btn");
