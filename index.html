@@ -105,7 +105,7 @@
               class="form-select" 
               aria-label="Select type of media"
               data-js="select-type">
-                <option selected>Select Media Type</option>
+                <option selected >Select Media Type</option>
                 <option value="all">All</option>
                 <option value="photo" data-js="select-type-photo">Photo</option>
                 <option value="illustration" data-js="select-type-illustration">Illustration</option>
@@ -119,18 +119,21 @@
             <legend class="mt-4">Category</legend>
             <select class="form-select" aria-label="Select category"
             data-js="select-category">
-              <option selected>Select Category</option>
-              <option value="">Animals</option>
-              <option value="">Backgrounds</option>
-              <option value="">Fashion</option>
-              <option value="">Nature</option>
-              <option value="">Science</option>
-              <option value="">Education</option>
-              <option value="">Feelings</option>
-              <option value="">Health</option>
-              <option value="">People</option>
+              <option selected value="all">Select Category</option>
+              <option value="animals">Animals</option>
+              <option value="backgrounds">Backgrounds</option>
+              <option value="fashion">Fashion</option>
+              <option value="nature">Nature</option>
+              <option value="science">Science</option>
+              <option value="education">Education</option>
+              <option value="feelings">Feelings</option>
+              <option value="health">Health</option>
+              <option value="people">People</option>
             </select>
           </fieldset>
+
+
+
           
 
       <!-- FILTER BY ORIENTATION -->
@@ -229,7 +232,6 @@
               id="color-select-red" 
               value="#ff0000" 
               title="Choose your color">
-
             <label 
               for="color-select-grey" 
               class="form-label"></label>
@@ -239,26 +241,9 @@
               id="color-select-grey" 
               value="#bbbbbb" 
               title="Choose your color">
-
           </fieldset>
 
         </form>
-
-
-        
-        <div class="dropdown mt-5">
-          <button 
-            class="btn btn-secondary dropdown-toggle" 
-            type="button" data-bs-toggle="dropdown">
-            Dropdown button
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </div>
-
       </div>
 
         </div>
