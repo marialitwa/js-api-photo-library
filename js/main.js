@@ -1,14 +1,9 @@
 // GLOBAL VARIABLES
 const apiKey = "40712154-08ce4dcac58c3112602f88d10";
 const apiUrl = "https://pixabay.com/api/";
-const itemsPerPage = 100;
+const itemsPerPage = 50;
 
-const imgContainer = document.querySelector('[data-js="api-data"]');
-
-const form = document.querySelector('[data-js="form-search-bar"]');
-const input = document.querySelector('[data-js="input-search-bar"]');
-const clearInputBtn = document.querySelector('[data-js="clear-input-btn"]');
-       
+let currentImages = [];
 
 // ASYNCH FETCH
 async function fetchData(query) {
@@ -20,14 +15,15 @@ async function fetchData(query) {
         const response = await fetch(`${apiUrl}?key=${apiKey}&q=${query}&per_page=${itemsPerPage}`);
         const data = await response.json();
 
-
         if (response.ok) {
             // Success (Good Response)
             generateCards(data.hits);
             addEvents(data.hits);
+            currentImages = data.hits;
+            // console.log(data.hits)
+            // console.log(data)
             // filterMediaType(data.hits);
              
-            
         } else {
             // Failure (Bad Response)
             console.error("Bad Response");
@@ -43,6 +39,7 @@ async function fetchData(query) {
 function generateCards(images) {
 
     // console.log("Data limited to let itemsPerPage", images)
+    const imgContainer = document.querySelector('[data-js="api-data"]');
 
     imgContainer.innerHTML = ""; // Clear previous content
 
@@ -81,29 +78,37 @@ function generateCards(images) {
         cardBody.append(tags)       
     });
 }
-fetchData(""); 
+fetchData(" "); 
 
 
 // FILTER BY VALUE/QUERY FROM SEARCHBAR
+
+// RENAME FUNCTION
 function filterByQuery() {
+    const selectType = document.querySelector('[data-js="select-type"]');
+    const form = document.querySelector('[data-js="form-search-bar"]');
+    const input = document.querySelector('[data-js="input-search-bar"]');
+    const clearInputBtn = document.querySelector('[data-js="clear-input-btn"]');
+
     form.addEventListener('submit', (event) => {
         event.preventDefault(); 
         fetchData(input.value); 
+        selectType.value = "all";
     })
+
+    clearInputBtn.addEventListener('click', () => {
+        input.value = "";
+        fetchData(""); 
+        }); 
 }
 filterByQuery();
 
 
-// CLEAR SEARCHBAR INPUT AND RESET FILTER FROM SEARCHBAR QUERY
-function clearInputSearchbar() {
-    clearInputBtn.addEventListener('click', () => {
-    input.value = "";
-    fetchData(""); 
-    });   
-}
-clearInputSearchbar();
-
-
+// // CLEAR SEARCHBAR INPUT AND RESET FILTER FROM SEARCHBAR QUERY
+// function clearInputSearchbar() {
+     
+// }
+// clearInputSearchbar();
 
 
 // TARGETING SELECT + OPTIONS
@@ -113,64 +118,64 @@ clearInputSearchbar();
 // const typeVector = document.querySelector('[data-js="select-type-vector"]');
 
 
-// CREATE EVENT LISTENER - DOES NOT WORK YET
-function addEvents(images) {
+
+
+// CREATE EVENT LISTENER
+function addEvents() {
 
     const selectType = document.querySelector('[data-js="select-type"]');
-    selectType.addEventListener("change", handleTypeChange(event, images));
-    }
+    selectType.addEventListener("change", function() {
+        
+        if (selectType.value.toLowerCase() === "all")  {
+            
+            generateCards(currentImages)
 
-    function handleTypeChange(event, images) {
-        const selectType = document.querySelector('[data-js="select-type"]');
+        } else {
 
-        console.log("Function triggert! :)")
-        // console.log(event.target.value)
+            let filteredImagesByType = [];
 
-        if (selectType.value === "all") {
-           return generateCards(images);
-        } 
-            // if (selectType.value === "photo") {
-            //     filterMediaType(filteredImagesByType);
+            // currentImages => original array with all images from API, not filtered
+            // filteredImagesByType => new array with images after filter by type
 
-    
-            // } else if (selectType.value === "illustration") {
-            //     filterMediaType(filteredImagesByType);
+            filteredImagesByType = currentImages.filter(image => {
+                console.log(image.type, selectType.value)
 
-    
-            // } else if (selectType.value === "vector") {
-            //     filterMediaType(filteredImagesByType);
+                return image.type.toLowerCase().includes(selectType.value.toLowerCase());
 
-            // }
+            });
 
-    }
-
-
-    
-// FILTER BY MEDIA TYPE - DOES NOT WORK YET
-
-let filteredImagesByType = [];
-
-function filterMediaType(images) {
-
-    const selectType = document.querySelector('[data-js="select-type"]');
-    console.log(selectType.value);
-
-    if (selectType.value.toLowerCase() === "all")  {
-        filteredImagesByType = images;
-        console.log(filteredImagesByType)
-
-    } else {
-
-        if (selectType.value.toLowerCase() !== "all") {
-            console.log(selectType.value);
-
-            for (let i = 0; i < images.length; i++) {
-                if (images[i].type.toLowerCase() === selectType.value.toLowerCase()){
-                    filteredImagesByType.push(images[i]);  
-                };
-            }
+            generateCards(filteredImagesByType);
             console.log(filteredImagesByType)
-
         }
-    }
+    });
 }
+
+            // ADD A MESSAGE WHEN THERE IS NO IMAGE WITH THE SELECTED VALUE/TYPE
+            // DOES NOT WORK
+    //         filteredImagesByType = currentImages.filter(image => {
+    
+    //             if (image.type.toLowerCase().includes(selectType.value.toLowerCase())) {
+                    
+    //                 generateCards(filteredImagesByType)
+                    
+    //             } else {
+    //                 // alert("There is no such type");
+    //                 noData()          
+    //             }
+    //         });
+    //         generateCards(filteredImagesByType)            
+    //     }
+    // });
+    
+    // addEvents();
+
+
+    function noData() {
+        const noDataContainer = document.querySelector('[data-js="no-data"]');
+        noDataContainer.innerHTML = "";
+        const message = document.createElement("p");
+        message.textContent = "This media type does not exist in our database. Please select another type.";
+        message.style.color = "hotpink";
+        message.style.fontSize = "2rem"
+        noDataContainer.append(message);   
+    }
