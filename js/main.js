@@ -88,36 +88,29 @@ function filterByQuery() {
     const selectType = document.querySelector('[data-js="select-type"]');
     const form = document.querySelector('[data-js="form-search-bar"]');
     const input = document.querySelector('[data-js="input-search-bar"]');
-    const clearInputBtn = document.querySelector('[data-js="clear-input-btn"]');
 
     form.addEventListener('submit', (event) => {
         event.preventDefault(); 
         fetchData(input.value); 
         selectType.value = "all";
-    })
-
-    clearInputBtn.addEventListener('click', () => {
-        input.value = "";
-        fetchData(""); 
-        }); 
+    }) 
 }
 filterByQuery();
 
 
 // // CLEAR SEARCHBAR INPUT AND RESET FILTER FROM SEARCHBAR QUERY
-// function clearInputSearchbar() {
+function clearInputSearchbar() {
+
+    const input = document.querySelector('[data-js="input-search-bar"]');
+    const clearInputBtn = document.querySelector('[data-js="clear-input-btn"]');
+
+    clearInputBtn.addEventListener('click', () => {
+    input.value = "";
+    fetchData(""); 
+    }); 
      
-// }
-// clearInputSearchbar();
-
-
-// TARGETING SELECT + OPTIONS
-// const selectType = document.querySelector('[data-js="select-type"]');
-// const typePhoto = document.querySelector('[data-js="select-type-photo"]');
-// const typeIllustration = document.querySelector('[data-js="select-type-illustration"]');
-// const typeVector = document.querySelector('[data-js="select-type-vector"]');
-
-
+}
+clearInputSearchbar();
 
 
 // CREATE EVENT LISTENER
