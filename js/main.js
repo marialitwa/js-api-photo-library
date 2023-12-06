@@ -1,6 +1,6 @@
 // GLOBAL VARIABLES
 const apiUrl = "https://pixabay.com/api/";
-const itemsPerPage = 50;
+const itemsPerPage = 3;
 
 let currentImages = [];
 // currentImages => "original" array with all images from API, not filtered
@@ -185,7 +185,7 @@ function noData() {
 
     const message = document.createElement("p");
     message.classList.add("text-dark");
-    message.textContent = "We're truley sorry! We don't have any media type if this kind. Please select another option.";
+    message.textContent = "We're truley sorry! We don't have any media type of this kind. Please select another option.";
     message.style.fontSize = "1.8rem";
     message.style.textAlign = "center";
     message.style.boxShadow = "2px 2px 2px black;";
@@ -193,6 +193,9 @@ function noData() {
 
     noDataContainer.append(message); 
 };
+
+
+
 
 
 // CREATE EVENT LISTENER TO FILTER BY MEDIA TYPE WITHOUT DISPLAYING A MESSAGE WHEN THERE IS NOT DATA OF THIS TYPE.
