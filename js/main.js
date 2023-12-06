@@ -1,6 +1,6 @@
 // GLOBAL VARIABLES
 const apiUrl = "https://pixabay.com/api/";
-const itemsPerPage = 3;
+const itemsPerPage = 50;
 
 let currentImages = [];
 // currentImages => "original" array with all images from API, not filtered
